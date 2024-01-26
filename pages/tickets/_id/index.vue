@@ -1,13 +1,11 @@
 <template>
-  <c-ticket-main-id />
+  <ticket-main-id />
 </template>
 
 <script>
-import CTicketMainId from '~/components/tickets/CTicketMainId.vue'
+import TicketMainId from '../../../components/tickets/TicketMainId.vue'
 
-export default {
-  components: { CTicketMainId },
-}
+export default { components: { TicketMainId } }
 </script>
 
 <style></style>
