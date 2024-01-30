@@ -34,6 +34,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue2-editor', ssr: false },
     '@/plugins/vue-the-mask',
+    '@/plugins/element-ui',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
