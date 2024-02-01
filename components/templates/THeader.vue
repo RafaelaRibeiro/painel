@@ -74,9 +74,9 @@ export default {
       items: [
         {
           id: '1',
-          icon: 'mdi-ticket-confirmation',
-          title: 'Meus Chamados',
-          to: '/mytickets',
+          icon: 'mdi-view-dashboard',
+          title: 'Dashboards',
+          to: '/dashboards',
         },
         {
           id: '2',
