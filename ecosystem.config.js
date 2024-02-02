@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'portal',
+      name: 'painel',
       exec_mode: 'cluster',
       script: './node_modules/nuxt/bin/nuxt.js',
       args: 'start',

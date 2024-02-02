@@ -130,7 +130,6 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      callback: '/login',
       home: '/tickets',
     },
   },
