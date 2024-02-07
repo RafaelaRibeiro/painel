@@ -61,55 +61,77 @@
         <v-card-title>
           <i class="text-h5">Cadastro de Funcionários</i>
         </v-card-title>
-        <v-card-text>
-          <v-row class="mt-5">
-            <v-col cols="12" md="6" class="my-n4">
-              <span class="my-3">Nome:<sub>*</sub> </span>
-              <v-text-field v-model="user.name" required dense outlined>
-              </v-text-field>
-            </v-col>
+        <div>
+          <div class="mt-5 flex mx-4">
+            <div class="w-1/2 mr-4">
+              <span class="my-3 py">Nome:</span>
+              <input
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
+                v-model="user.name"
+              />
+            </div>
 
-            <v-col cols="12" md="6" class="my-n4">
-              <span class="my-3">E-mail:<sub>*</sub> </span>
-              <v-text-field v-model="user.email" required dense outlined>
-              </v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="6" class="my-n4">
-              <span class="my-3">Password:<sub>*</sub> </span>
-              <v-text-field
+            <div class="w-1/2">
+              <span class="my-3">E-mail:</span>
+              <input
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
+                v-model="user.email"
+              />
+            </div>
+          </div>
+          <div class="flex mx-4 mt-4">
+            <div class="w-1/2 mr-4">
+              <span class="my-3">Senha:</span>
+              <input
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
                 v-model="user.password"
                 type="password"
-                required
-                dense
-                outlined
+              />
+            </div>
+            <div class="w-1/2">
+              <span class="my-3">Confirme a Senha:</span>
+              <input
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
+                v-model="user.confirmPassword"
+                type="password"
+              />
+            </div>
+          </div>
+          <div class="flex mx-4 mt-4">
+            <div class="w-1/2 mr-4">
+              <span class="my-3">Perfil:</span>
+              <select
+                name="select"
+                v-model="user.profile"
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
               >
-              </v-text-field>
-            </v-col>
-            <v-col cols="12" md="6" class="my-n4">
-              <span class="my-3">Setor:<sub>*</sub> </span>
-              <v-select
+                <option v-for="item in profile" :key="item.id" :value="item.id">
+                  {{ item.title }}
+                </option>
+              </select>
+            </div>
+            <div class="w-1/2">
+              <span class="my-3">Departamento:</span>
+              <select
+                name="select"
                 v-model="user.department_id"
-                :items="departments"
-                item-text="name"
-                item-value="id"
-                required
-                dense
-                outlined
+                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
               >
-              </v-select>
-            </v-col>
-          </v-row>
-
-          <small>*Indica campo obrigatório</small>
-        </v-card-text>
+                <option
+                  v-for="item in departments"
+                  :key="item.id"
+                  :value="item.id"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Cancelar
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="saveUser"> Salvar </v-btn>
+          <v-btn color="primary" text @click="dialog = false"> Cancelar </v-btn>
+          <v-btn color="primary" text @click="saveUser"> Salvar </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -123,11 +145,16 @@ export default {
     return {
       loading: false,
       clients: [],
-      user: {},
+      user: { profile: 'U' },
       users: [],
       search: '',
       dialog: false,
       departments: [],
+      profile: [
+        { id: 'S', title: 'Administrador' },
+        { id: 'M', title: 'Gerente' },
+        { id: 'U', title: 'Usuário' },
+      ],
 
       headers: [
         {
@@ -185,20 +212,23 @@ export default {
   methods: {
     async saveUser() {
       try {
-        await this.$axios
-          .$post(`/clients/${this.$route.params.id}/users/create`, {
-            name: this.user.name,
-            email: this.user.email,
-            password: this.user.password,
-            department_id: this.user.department_id,
-          })
-          .then((response) => {
-            this.$toast.success('Dados salvos com sucesso', {
-              position: 'top-center',
-            })
-            this.dialog = false
-            this.usersByClient()
-          })
+        const newUser = {
+          name: this.user.name,
+          email: this.user.email,
+          password: this.user.password,
+          confirmPassword: this.user.confirmPassword,
+          profile: this.user.profile,
+          department_id: this.user.department_id,
+          client_id: Number(this.$route.params.id),
+        }
+
+        await this.$axios.$post(`/users`, newUser)
+
+        this.$toast.success('Dados salvos com sucesso', {
+          position: 'top-center',
+        })
+        this.dialog = false
+        this.usersByClient()
       } catch (error) {
         const { data } = error.response
 
@@ -255,4 +285,8 @@ sub {
 /* input {
   text-transform: uppercase;
 } */
+
+option {
+  height: 6px;
+}
 </style>

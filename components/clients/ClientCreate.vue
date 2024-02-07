@@ -137,7 +137,7 @@ export default {
       } = this.company
       try {
         await this.$axios
-          .$post('/clients/create', {
+          .$post('/clients', {
             cgc,
             corporate_name,
             trade_name,
@@ -150,7 +150,12 @@ export default {
               path: `/clients/${id}`,
             })
           })
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+        this.$toast.error('Erro ao cadastrar o cliente', {
+          position: 'top-center',
+        })
+      }
     },
   },
 }

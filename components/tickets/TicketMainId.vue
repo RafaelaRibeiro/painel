@@ -1,9 +1,9 @@
 <template>
-  <div class="grid grid-cols-5 gap-4 my-2 min-h-[85vh]">
-    <div class="h-full col-span-1 bg-white">
+  <div class="grid grid-cols-5 gap-4 mt-4 min-h-[83vh]">
+    <div class="col-span-1 bg-white">
       <ticket-info-client :ticket="ticket" :client="client" />
     </div>
-    <div class="col-span-3 bg-white min-h-[85vh] max-h-[85vh] overflow-y-auto">
+    <div class="col-span-3 bg-white min-h-[83vh] max-h-[80vh] overflow-y-auto">
       <div class="bg-white px-2 py-4 flex items-center justify-between">
         <h1 class="headline font-weight-light mb-4">
           <i>
@@ -126,7 +126,7 @@
       </div>
     </div>
 
-    <div class="h-full col-span-1 bg-white">
+    <div class="col-span-1 bg-white">
       <ticket-info-ticket
         :ticket="ticket"
         :priorities="priorities"

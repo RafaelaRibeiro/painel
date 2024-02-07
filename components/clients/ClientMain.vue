@@ -39,11 +39,8 @@
         @click:row="openDetails"
       >
         <template v-slot:[`item.cgc`]="{ item }">
-          <span
-            ><the-mask
-              :mask="['###.###.###-##', '##.###.###/####-##']"
-              :value="item.cgc"
-            />
+          <span>
+            {{ item.cgc | cnpj }}
           </span>
         </template>
       </v-data-table>

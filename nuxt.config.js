@@ -22,6 +22,8 @@ export default {
     ],
   },
 
+  mode: 'spa',
+
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 3000,
@@ -35,6 +37,7 @@ export default {
     { src: '~/plugins/vue2-editor', ssr: false },
     '@/plugins/vue-the-mask',
     '@/plugins/element-ui',
+    '~/plugins/cnpj-filter-plugin',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
