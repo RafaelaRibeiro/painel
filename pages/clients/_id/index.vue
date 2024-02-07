@@ -13,7 +13,7 @@
     <v-card>
       <v-tabs
         v-model="tab"
-        background-color="deep-purple lighten-5"
+        background-color="#d9f1fb"
         active-class=" primary font-weight-medium white--text shadow p-3 mb-2 rounded "
       >
         <v-tabs-slider color="white"></v-tabs-slider>
@@ -23,12 +23,7 @@
         <v-tab-item :transition="false" :reverse-transition="false">
           <client-main-id :client="client" />
         </v-tab-item>
-        <v-tab-item :transition="false" :reverse-transition="false">
-          <client-address :client="client" />
-        </v-tab-item>
-        <v-tab-item :transition="false" :reverse-transition="false">
-          <client-contract :client="client" />
-        </v-tab-item>
+
         <v-tab-item :transition="false" :reverse-transition="false">
           <client-department :client="client" />
         </v-tab-item>
@@ -43,7 +38,7 @@
 <script>
 import ClientMainId from '../../../components/clients/ClientMainId.vue'
 import ClientAddress from '~/components/clients/ClientAddress.vue'
-import ClientContract from '~/components/clients/ClientContract.vue'
+
 import ClientDepartment from '~/components/clients/ClientDepartment.vue'
 import ClientUsers from '~/components/clients/ClientUsers.vue'
 
@@ -51,7 +46,7 @@ export default {
   components: {
     ClientMainId,
     ClientAddress,
-    ClientContract,
+
     ClientDepartment,
     ClientUsers,
   },
@@ -61,10 +56,8 @@ export default {
       tab: null,
       titles: [
         { id: 1, text: 'Dados Gerais', href: 'ClientData' },
-        { id: 2, text: 'Endereço', href: 'ClientAddress' },
-        { id: 3, text: 'Contratos', href: 'ClientContract' },
-        { id: 4, text: 'Departamentos', href: 'ClientDepartment' },
-        { id: 5, text: 'Funcionários', href: 'ClientUsers' },
+        { id: 2, text: 'Departamentos', href: 'ClientDepartment' },
+        { id: 3, text: 'Funcionários', href: 'ClientUsers' },
       ],
     }
   },

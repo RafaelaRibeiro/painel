@@ -44,6 +44,10 @@ export default {
   },
 
 
+  mode: 'spa',
+
+
+
   server: {
 
     host: '0.0.0.0',
@@ -67,7 +71,7 @@ export default {
     '@/plugins/vue-the-mask',
 
     '@/plugins/element-ui',
-
+    '~/plugins/cnpj-filter-plugin'
   ],
 
 
@@ -244,7 +248,6 @@ export default {
       login: '/login',
 
       logout: '/login',
-
       home: '/tickets',
 
     },
