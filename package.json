@@ -18,6 +18,7 @@
     "core-js": "^3.25.3",
     "dayjs": "^1.11.7",
     "defu": "^6.1.4",
+    "dotenv": "^16.4.1",
     "element-ui": "^2.15.14",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
@@ -26,6 +27,7 @@
     "vue-the-mask": "^0.11.1",
     "vue-toastification": "^1.7.14",
     "vue2-editor": "^2.10.3",
+    "vuedraggable": "^2.24.3",
     "vuetify": "^2.6.10",
     "vuex-persistedstate": "^4.1.0"
   },
