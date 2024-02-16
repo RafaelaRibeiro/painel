@@ -136,6 +136,30 @@ export default {
     }
   },
 
+  mounted() {
+    // Preencher automaticamente o campo de atendente com o ID do usuário logado
+    if (this.$auth && this.$auth.user && this.$auth.user.id) {
+      this.ticket.agent_id = this.$auth.user.id
+    }
+  },
+
+  watch: {
+    // Reiniciar o preenchimento automático se o ticket mudar (por exemplo, após uma atualização bem-sucedida)
+    ticket: {
+      handler(newTicket) {
+        if (
+          !newTicket.agent_id &&
+          this.$auth &&
+          this.$auth.user &&
+          this.$auth.user.id
+        ) {
+          newTicket.agent_id = this.$auth.user.id
+        }
+      },
+      deep: true,
+    },
+  },
+
   computed: {
     nameUser() {
       return this.ticket?.user?.name

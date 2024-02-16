@@ -5,7 +5,7 @@
     </div>
     <div class="col-span-3 bg-white min-h-[83vh] max-h-[80vh] overflow-y-auto">
       <div class="bg-white px-2 py-4 flex items-center justify-between">
-        <h1 class="headline font-weight-light mb-4">
+        <h1 class="headline font-weight-light mb-4 w-1/2">
           <i>
             <v-icon size="30" class="px-3">mdi-ticket-confirmation</v-icon>
             #{{ ticket.id }} - {{ ticket.subject }}

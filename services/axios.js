@@ -1,14 +1,11 @@
 // api/axios.js
-import dotenv from 'dotenv'
-dotenv.config()
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? process.env.VUE_APP_URL_PROD
-      : process.env.VUE_APP_URL_DEV,
+  baseURL: 'http://localhost:3333',
+  //baseURL: 'https://backend.exatoinovacoes.com.br',
 })
+
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth._token.local')
 

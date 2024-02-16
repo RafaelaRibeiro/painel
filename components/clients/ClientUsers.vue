@@ -82,22 +82,30 @@
           <div class="flex mx-4 mt-4">
             <div class="w-1/2 mr-4">
               <span class="my-3">Senha:</span>
-              <input
-                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
+              <v-text-field
                 v-model="user.password"
-                type="password"
-              />
+                outlined
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                color="primary"
+                dense
+                :type="show ? 'text' : 'password'"
+                @click:append="show = !show"
+              ></v-text-field>
             </div>
             <div class="w-1/2">
               <span class="my-3">Confirme a Senha:</span>
-              <input
-                class="rounded px-4 py-2 text-base block w-full text-gray-700 leading-tight bg-white border border-solid border-gray-500 focus:border-2 focus:outline-none focus:border-colorButton hover:border-colorButton"
+              <v-text-field
                 v-model="user.confirmPassword"
-                type="password"
-              />
+                outlined
+                :append-icon="showConfirm ? 'mdi-eye' : 'mdi-eye-off'"
+                color="primary"
+                dense
+                :type="showConfirm ? 'text' : 'password'"
+                @click:append="showConfirm = !showConfirm"
+              ></v-text-field>
             </div>
           </div>
-          <div class="flex mx-4 mt-4">
+          <div class="flex mx-4">
             <div class="w-1/2 mr-4">
               <span class="my-3">Perfil:</span>
               <select
@@ -150,6 +158,8 @@ export default {
       search: '',
       dialog: false,
       departments: [],
+      show: false,
+      showConfirm: false,
       profile: [
         { id: 'S', title: 'Administrador' },
         { id: 'M', title: 'Gerente' },
