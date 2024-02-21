@@ -38,7 +38,10 @@
           </div>
         </div>
         <div class="max-w-2xl mx-auto my-4">
-          <p v-html="content.content" class="text-gray-600 break-words"></p>
+          <h2
+            v-html="content.content"
+            class="text-gray-600 break-words styled-content"
+          ></h2>
         </div>
         <div v-show="files.length">
           <div class="mb-2">
@@ -108,7 +111,9 @@
 
 <script>
 import dayjs from 'dayjs'
+import QuillEditor from '../UI/QuillEditor.vue'
 export default {
+  components: { QuillEditor },
   props: ['content'],
   data() {
     return {
@@ -173,4 +178,10 @@ export default {
 }
 </script>
 
-<style></style>
+
+
+<style >
+.v-application p {
+  margin-bottom: 0 !important;
+}
+</style>

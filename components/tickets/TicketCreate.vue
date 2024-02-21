@@ -10,7 +10,7 @@
     <div class="m-6">
       <div class="-mb-4 flex">
         <div class="w-1/2 mr-4">
-          <span> Cliente: </span>
+          <span> Usuário: </span>
           <v-autocomplete
             v-model="ticket.user_id"
             :items="users"
@@ -18,25 +18,20 @@
             item-value="id"
             outlined
             dense
+            @change="getOrganization"
           >
-            <template #item="{ item }">
-              <span> {{ item.user.name }} ({{ item.client?.trade_name }})</span>
-            </template>
           </v-autocomplete>
         </div>
         <div class="w-1/2">
           <span> Organização: </span>
           <v-autocomplete
-            v-model="ticket.user_id"
-            :items="users"
-            item-text="name"
-            item-value="id"
+            v-model="ticket.client_id"
+            :items="clients"
+            item-text="client_name"
+            item-value="client_id"
             outlined
             dense
           >
-            <template #item="{ item }">
-              <span> {{ item.user.name }} ({{ item.client?.trade_name }})</span>
-            </template>
           </v-autocomplete>
         </div>
       </div>
@@ -72,12 +67,13 @@
         <v-text-field v-model="ticket.subject" outlined dense></v-text-field>
       </div>
       <div>
-        <no-ssr>
+        <!-- <no-ssr>
           <vue-editor
             placeholder="Escreva aqui..."
             v-model="ticket.content"
           ></vue-editor>
-        </no-ssr>
+        </no-ssr> -->
+        <quill-editor v-model="ticket.content" />
       </div>
       <div class="mt-3">
         <upload @fileInputRef="onFileInputRef" />
@@ -110,10 +106,11 @@
 
 <script>
 import BaseCard from '../UI/BaseCard.vue'
+import QuillEditor from '../UI/QuillEditor.vue'
 import Upload from '../UI/Upload.vue'
 
 export default {
-  components: { BaseCard, Upload },
+  components: { BaseCard, Upload, QuillEditor },
 
   props: ['users', 'priorities', 'categories'],
 
@@ -121,9 +118,12 @@ export default {
     return {
       icon: 'mdi-ticket-confirmation',
       text: 'Tickets',
+      clients: [],
       ticket: {
         priority_id: 2,
+        content: '',
       },
+      editedContent: '',
       fileInputRef: null,
       ticket_content_id: null,
       snackbar: {
@@ -141,6 +141,7 @@ export default {
     async saveTicket() {
       const response = await this.$axios.post('/tickets', {
         user_id: this.ticket.user_id,
+        client_id: this.ticket.client_id,
         category_id: this.ticket.category_id,
         priority_id: this.ticket.priority_id,
         subject: this.ticket.subject,
@@ -186,6 +187,18 @@ export default {
         console.error(error)
       } finally {
         this.isUploading = false
+      }
+    },
+
+    async getOrganization() {
+      try {
+        const response = await this.$axios.$get(
+          `users/${this.ticket.user_id}/clients`
+        )
+        this.clients = response
+        console.log(response)
+      } catch (error) {
+        console.log(error)
       }
     },
   },

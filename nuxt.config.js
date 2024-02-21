@@ -30,13 +30,22 @@ export default {
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
 
-  css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/main.css'],
+  css: [
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/main.css',
+    'quill/dist/quill.core.css',
+    // for snow theme
+    'quill/dist/quill.snow.css',
+    // for bubble theme
+    'quill/dist/quill.bubble.css',
+  ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vue2-editor', ssr: false },
     '@/plugins/vue-the-mask',
     '@/plugins/element-ui',
     '~/plugins/cnpj-filter-plugin',
+    { src: '~plugins/quill-editor', ssr: false },
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

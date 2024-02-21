@@ -7,13 +7,13 @@
     </div>
 
     <div class="ma-2">
-      <p class="text-sm">
+      <p class="text-sm mb-1">
         <span>Usuário: {{ ticket?.user?.name }}</span>
       </p>
-      <p class="text-sm">
+      <p class="text-sm mb-1">
         <span> Cliente: {{ client?.trade_name }}</span>
       </p>
-      <p class="text-sm break-all">
+      <p class="text-sm break-all mb-1">
         <span>E-mail: {{ ticket?.user?.email }}</span>
       </p>
       <p class="text-sm">

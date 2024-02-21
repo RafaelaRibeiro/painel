@@ -89,11 +89,19 @@
     >
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.id="{ item }">
-        <span>#{{ item.id }}</span>
+        <span class="text-xs">#{{ item.id }}</span>
       </template>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.subject="{ item }">
-        <span>{{ item.subject }}</span>
+        <span class="text-xs">{{ item.subject }}</span>
+      </template>
+      <!-- eslint-disable-next-line vue/valid-v-slot -->
+      <template v-slot:item.client.trade_name="{ item }">
+        <span class="text-xs">{{ item.client.trade_name }}</span>
+      </template>
+      <!-- eslint-disable-next-line vue/valid-v-slot -->
+      <template v-slot:item.category.name="{ item }">
+        <span class="text-xs">{{ item.category.name }}</span>
       </template>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.situation.name="{ item }">
@@ -109,7 +117,7 @@
       </template>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.agent?.name="{ item }">
-        <span> {{ item.agent?.name }}</span>
+        <span class="text-xs"> {{ item.agent?.name }}</span>
       </template>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.created_at="{ item }">
@@ -212,7 +220,7 @@ export default {
         {
           text: 'Cliente',
           align: 'start',
-          value: 'user.name',
+          value: 'client.trade_name',
           sortable: true,
           width: '12%',
         },
@@ -346,8 +354,8 @@ export default {
 
     async getUsers() {
       try {
-        const response = await this.$axios.$get('/users/clients')
-        this.users = response
+        const response = await this.$axios.$get('/users')
+        this.users = response || []
 
         console.log(this.users)
       } catch (error) {
